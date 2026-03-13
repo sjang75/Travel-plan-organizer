@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Travel Planner</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <div id="trip-list-view" class="wrap">
+    <header class="top-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px;">
+      <div>
+        <h1 class="page-title" style="margin-bottom: 5px;">My Trips</h1>
+        <p class="page-subtitle" style="font-size: 15px; color: var(--muted);">Plan and organize your travel itineraries</p>
+      </div>
+      <button class="btn-primary" id="btn-new-trip-top">＋ New Trip</button>
+    </header>
+
+    <main class="empty-state" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 50vh; text-align: center;">
+      <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 64px; height: 64px; color: #94a3b8; margin-bottom: 20px;">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+      <h2>No trips yet</h2>
+      <p style="font-size: 15px; color: var(--muted); margin-bottom: 24px;">Start planning your next adventure!</p>
+      <button class="btn-primary" id="btn-create-first">＋ Create Your First Trip</button>
+    </main>
+  </div>
+
+  <div id="trip-form-view" class="wrap" style="display: none;">
+    
+    <button class="btn-back" id="btn-back-to-trips" style="background: none; border: none; color: var(--muted); font-size: 15px; cursor: pointer; margin-bottom: 20px; display: flex; align-items: center;">← Back to Trips</button>
+
+    <h1 class="page-title">Travel Planner</h1>
+
+    <div class="layout">
+
+      <section class="card">
+      <h2 class="section-title">Basic Information</h2>
+      <div class="basic-grid">
+      <div class="field full">
+      <label>Trip Title</label>
+      <input type="text" id="tripTitle">
+      </div>
+      <div class="field">
+      <label>Start Date</label>
+      <input type="date" id="startDate">
+      </div>
+      <div class="field">
+      <label>End Date</label>
+      <input type="date" id="endDate">
+      </div>
+      <div class="field">
+      <label>Nights</label>
+      <input type="number" id="nights" readonly>
+      </div>
+      <div class="field">
+      <label>Days</label>
+      <input type="number" id="daysCount" readonly>
+      </div>
+      <div class="field full">
+      <label>Route</label>
+      <input type="text" placeholder="e.g., Seoul → Busan">
+      </div>
+      <div class="field">
+      <label>Departure Time</label>
+      <input type="text" placeholder="e.g., 9:00–11:10">
+      </div>
+      <div class="field">
+      <label>Return Time</label>
+      <input type="text" placeholder="e.g., 5:30–7:58">
+      </div>
+      </div>
+      </section>
+
+      <section class="card">
+      <div class="participants-section">
+      <h3>Participants</h3>
+      <div id="participants-list">
+      <div class="participant-row">
+      <input type="text" placeholder="Participant name">
+      <button class="delete-btn" onclick="removeRow(this)">🗑️</button>
+      </div>
+      </div>
+      <button id="add-btn" onclick="addRow()">+ Add Participant</button>
+      </div>
+      </section>
+
+      <section class="card">
+      <div class="section-header">
+      <h2 class="section-title">Costs</h2>
+      <div class="total-badge">
+      <span class="label">Total</span>
+      <span id="grand-total-badge">$0.00</span>
+      </div>
+      </div>
+      <div class="costs-card">
+      <div id="categories-container"></div>
+      <div id="empty-state" class="empty-state">
+      <div class="empty-icon">🧾</div>
+      <div>No cost categories yet.<br>Add one below to get started.</div>
+      </div>
+      <div class="costs-footer">
+      <button class="btn-add-category" onclick="addCostCategory()">
+      Add Cost Category
+      </button>
+      <div class="footer-total">
+      Total: <strong id="grand-total-text">$0.00</strong>
+      </div>
+      </div>
+      </div>
+      </section>
+
+      <section class="card">
+      <div class="page-card">
+      <div class="topbar">
+      <div>
+      <h2 class="section-title">Itinerary</h2>
+      <div class="hint">Add days and schedule items for your trip.</div>
+      </div>
+      <div class="summary">
+      <div class="pill">Items: <b id="itemsCount">0</b></div>
+      <div class="pill">Total: <b id="itineraryGrandTotal">$0</b></div>
+      </div>
+      </div>
+      <div class="days" id="days"></div>
+      <button class="btn-link" id="addDayBtn">
+      <span class="icon">＋</span> Add Day
+      </button>
+      <div class="footer">
+      <button class="cta" id="saveBtn">Create Trip</button>
+      <button class="btn cancel" id="resetBtn">Cancel (Reset)</button>
+      </div>
+      </div>
+      </section>
+
+    </div>
+  </div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
